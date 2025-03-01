@@ -1,0 +1,306 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 1250px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  background-color: #121212;
+}
+
+.navbar {
+  display: flex; /* Menggunakan Flexbox untuk tata letak */
+  align-items: center; /* Menyelaraskan item secara vertikal */
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #222;
+}
+
+.logo-container {
+  display: flex; /* Menggunakan Flexbox untuk logo dan judul */
+  align-items: center; /* Menyelaraskan logo dan judul secara vertikal */
+}
+
+.logo-container a {
+  display: flex;
+  align-items: center;
+}
+.navbar-logo {
+  width: 50px; /* Atur lebar kontainer logo */
+  height: 45px; /* Atur tinggi kontainer logo */
+  overflow: hidden; /* Menyembunyikan bagian gambar yang keluar */
+  border-radius: 16px; /* Menambahkan curve di sudut */
+  position: relative; /* Menyediakan konteks untuk posisi gambar */
+  margin-right: 1rem; /* Memberikan jarak antara logo dan teks */
+}
+
+.navbar-logo img {
+  width: 70px; /* Mengatur lebar gambar agar sesuai dengan kontainer */
+  height: auto; /* Menjaga rasio aspek */
+  object-fit: cover; /* Meng-crop gambar agar menutupi area */
+  object-position: center; /* Menempatkan gambar di tengah */
+  position: absolute; /* Memungkinkan penempatan gambar di dalam kontainer */
+  top: 45%; /* Memindahkan gambar ke tengah vertikal */
+  left: 45%; /* Memindahkan gambar ke tengah horizontal */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Mengatur posisi gambar agar tepat di tengah */
+}
+
+.navbar-title {
+  color: #ffffff; /* Pastikan warna teks kontras dengan latar belakang */
+  font-size: 1.5rem; /* Ukuran font yang cukup besar */
+  margin: 0; /* Menghapus margin default */
+}
+
+/* Navigasi */
+nav ul {
+  list-style: none; /* Menghapus bullet point */
+  display: flex; /* Menggunakan Flexbox untuk item navigasi */
+  margin: 0; /* Menghapus margin default */
+  padding: 0; /* Menghapus padding default */
+  font-weight: 600;
+}
+
+nav ul li {
+  margin-left: 2rem; /* Memberikan jarak antar item navigasi */
+}
+
+nav ul li a {
+  color: #ffffff; /* Warna teks link */
+  text-decoration: none; /* Menghapus garis bawah pada link */
+}
+
+nav ul li a:hover {
+  color: #ff8800; /* Mengubah warna teks saat hover */
+  text-decoration: underline; /* Menambahkan garis bawah saat hover */
+}
+
+main {
+  flex: 1;
+}
+
+.banner {
+  width: 93.5%;
+  min-height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://i.pinimg.com/736x/93/b7/b0/93b7b09fdc1f2c874a16aeb69829dbc0.jpg")
+      center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-text {
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  margin-top: -5vh;
+}
+
+.banner-text h1,
+p {
+  margin-bottom: 1vh;
+}
+
+.banner-image {
+  flex: 2;
+  max-width: 600px;
+  margin-top: -5vh;
+}
+
+.carousel-slide {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.carousel-slide.active {
+  display: block;
+  opacity: 1;
+}
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Pastikan gambar menutupi area tanpa distorsi */
+  border-radius: 20px;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.carousel-button.prev {
+  left: 20px;
+}
+
+.carousel-button.next {
+  right: 20px;
+}
+
+.carousel-button:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #003399;
+}
+
+.text-content {
+  flex: 1;
+  max-width: 300px;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .banner {
+    flex-direction: column; /* Susun horizontal di desktop */
+    padding: 4rem;
+  }
+
+  .banner-text {
+    margin-bottom: 4rem;
+  }
+
+  .banner-image {
+    width: 200%;
+  }
+
+  .carousel {
+    height: 30vh;
+  }
+}
+@media (max-width: 768px) {
+  .banner-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .banner-text p {
+    font-size: 1rem;
+  }
+
+  .banner-image {
+    order: -1;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .carousel {
+    height: 300px;
+  }
+
+  .carousel-button {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    height: 200px;
+  }
+}
+banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Overlay gelap */
+  z-index: 1;
+}
+
+.banner-text,
+.banner-image {
+  position: relative;
+  z-index: 2;
+}
+.cta-button {
+  background-color: #ff8800;
+  color: #ddd;
+  margin-top: 1.5rem;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.best-seller {
+  text-align: center;
+  padding: 2rem;
+  background-color: #181818;
+}
+
+.best-seller h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.best-seller p {
+  color: #bbb;
+  margin-bottom: 2rem;
+}
+
+.game-list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.game-card {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  height: auto;
+}
+
+.game-card img {
+  width: 400px;
+  height: 250px;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.game-card p {
+  margin: 0;
+  font-size: 1rem;
+  color: #ddd;
+}
+.game-card:hover {
+  background-color: #333; /* Mengubah warna latar belakang saat hover */
+  transform: scale(1.02); /* Sedikit memperbesar kartu saat hover */
+  transition: background-color 0.3s, transform 0.3s; /* Menambahkan transisi */
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #222;
+  color: #bbb;
+  font-size: 0.9rem;
+}

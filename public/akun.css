@@ -1,0 +1,148 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  background-color: #121212;
+}
+
+.navbar {
+  display: flex; /* Menggunakan Flexbox untuk tata letak */
+  align-items: center; /* Menyelaraskan item secara vertikal */
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #222;
+}
+
+.logo-container {
+  display: flex; /* Menggunakan Flexbox untuk logo dan judul */
+  align-items: center; /* Menyelaraskan logo dan judul secara vertikal */
+}
+
+.logo-container a {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 50px; /* Atur lebar kontainer logo */
+  height: 45px; /* Atur tinggi kontainer logo */
+  overflow: hidden; /* Menyembunyikan bagian gambar yang keluar */
+  border-radius: 16px; /* Menambahkan curve di sudut */
+  position: relative; /* Menyediakan konteks untuk posisi gambar */
+  margin-right: 1rem; /* Memberikan jarak antara logo dan teks */
+}
+
+.navbar-logo img {
+  width: 70px; /* Mengatur lebar gambar agar sesuai dengan kontainer */
+  height: auto; /* Menjaga rasio aspek */
+  object-fit: cover; /* Meng-crop gambar agar menutupi area */
+  object-position: center; /* Menempatkan gambar di tengah */
+  position: absolute; /* Memungkinkan penempatan gambar di dalam kontainer */
+  top: 45%; /* Memindahkan gambar ke tengah vertikal */
+  left: 45%; /* Memindahkan gambar ke tengah horizontal */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Mengatur posisi gambar agar tepat di tengah */
+}
+
+.navbar-title {
+  color: #ffffff; /* Pastikan warna teks kontras dengan latar belakang */
+  font-size: 1.5rem; /* Ukuran font yang cukup besar */
+  margin: 0; /* Menghapus margin default */
+}
+
+nav ul {
+  list-style: none; /* Menghapus bullet point */
+  display: flex; /* Menggunakan Flexbox untuk item navigasi */
+  margin: 0; /* Menghapus margin default */
+  padding: 0; /* Menghapus padding default */
+  font-weight: 600;
+}
+
+nav ul li {
+  margin-left: 2rem; /* Memberikan jarak antar item navigasi */
+}
+
+nav ul li a {
+  color: #ffffff; /* Warna teks link */
+  text-decoration: none; /* Menghapus garis bawah pada link */
+}
+
+nav ul li a:hover {
+  color: #ff8800; /* Mengubah warna teks saat hover */
+  text-decoration: underline; /* Menambahkan garis bawah saat hover */
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  background-color: #181818; /* Warna latar belakang untuk konten utama */
+  border-radius: 8px; /* Menambahkan sudut melengkung */
+  margin: 2rem; /* Memberikan margin di sekitar konten */
+}
+
+h2 {
+  text-align: center;
+  color: #ff8800; /* Warna judul */
+}
+
+form {
+  background-color: #292929; /* Warna latar belakang form */
+  padding: 1.5rem;
+  border-radius: 8px; /* Menambahkan sudut melengkung */
+  margin-bottom: 1.5rem; /* Memberikan jarak antar form */
+}
+
+form h3 {
+  margin: 0 0 1rem 0; /* Mengatur margin judul form */
+  text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%; /* Mengatur lebar input */
+  padding: 0.5rem; /* Memberikan padding di dalam input */
+  margin-bottom: 1rem; /* Memberikan jarak antar input */
+  border: none; /* Menghapus border default */
+  border-radius: 4px; /* Menambahkan sudut melengkung */
+  background-color: #444; /* Warna latar belakang input */
+  color: #ffffff; /* Warna teks input */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none; /* Menghapus outline saat fokus */
+  background: #555;
+}
+
+button {
+  width: 100%; /* Mengatur lebar tombol */
+  padding: 0.5rem; /* Memberikan padding di dalam tombol */
+  border: none; /* Menghapus border default */
+  border-radius: 4px; /* Menambahkan sudut melengkung */
+  background-color: #ff8800; /* Warna latar belakang tombol */
+  color: #ffffff; /* Warna teks tombol */
+  font-weight: bold; /* Menebalkan teks tombol */
+  cursor: pointer; /* Mengubah kursor saat hover */
+}
+
+button:hover {
+  background-color: #e07b00; /* Mengubah warna tombol saat hover */
+}
+
+/* Footer */
+footer {
+  text-align: center; /* Menyelaraskan teks di tengah */
+  padding: 1rem; /* Memberikan padding di dalam footer */
+  background-color: #222; /* Warna latar belakang footer */
+  color: #ffffff; /* Warna teks footer */
+  position: relative; /* Memungkinkan penempatan footer di bawah */
+  bottom: 0; /* Menempatkan footer di bagian bawah */
+  width: 100%; /* Mengatur lebar footer */
+}

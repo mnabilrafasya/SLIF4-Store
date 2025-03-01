@@ -1,0 +1,277 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 1250px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  background-color: #121212;
+}
+
+.navbar {
+  display: flex; /* Menggunakan Flexbox untuk tata letak */
+  align-items: center; /* Menyelaraskan item secara vertikal */
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #222;
+}
+
+.logo-container {
+  display: flex; /* Menggunakan Flexbox untuk logo dan judul */
+  align-items: center; /* Menyelaraskan logo dan judul secara vertikal */
+}
+
+.logo-container a {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 50px; /* Atur lebar kontainer logo */
+  height: 45px; /* Atur tinggi kontainer logo */
+  overflow: hidden; /* Menyembunyikan bagian gambar yang keluar */
+  border-radius: 16px; /* Menambahkan curve di sudut */
+  position: relative; /* Menyediakan konteks untuk posisi gambar */
+  margin-right: 1rem; /* Memberikan jarak antara logo dan teks */
+}
+
+.navbar-logo img {
+  width: 70px; /* Mengatur lebar gambar agar sesuai dengan kontainer */
+  height: auto; /* Menjaga rasio aspek */
+  object-fit: cover; /* Meng-crop gambar agar menutupi area */
+  object-position: center; /* Menempatkan gambar di tengah */
+  position: absolute; /* Memungkinkan penempatan gambar di dalam kontainer */
+  top: 45%; /* Memindahkan gambar ke tengah vertikal */
+  left: 45%; /* Memindahkan gambar ke tengah horizontal */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Mengatur posisi gambar agar tepat di tengah */
+}
+
+.navbar-title {
+  color: #ffffff; /* Pastikan warna teks kontras dengan latar belakang */
+  font-size: 1.5rem; /* Ukuran font yang cukup besar */
+  margin: 0; /* Menghapus margin default */
+}
+
+nav ul {
+  list-style: none; /* Menghapus bullet point */
+  display: flex; /* Menggunakan Flexbox untuk item navigasi */
+  margin: 0; /* Menghapus margin default */
+  padding: 0; /* Menghapus padding default */
+  font-weight: 600;
+}
+
+nav ul li {
+  margin-left: 2rem; /* Memberikan jarak antar item navigasi */
+}
+
+nav ul li a {
+  color: #ffffff; /* Warna teks link */
+  text-decoration: none; /* Menghapus garis bawah pada link */
+}
+
+nav ul li a:hover {
+  color: #ff8800; /* Mengubah warna teks saat hover */
+  text-decoration: underline; /* Menambahkan garis bawah saat hover */
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.transaction-list {
+  width: 100%;
+  max-width: 800px;
+  margin: 1rem auto;
+}
+
+.transaction-item {
+  transition: all 0.3s;
+  border-left: 5px solid;
+  background: #1a1a1a;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-item.pending {
+  border-color: #ffc107;
+  background: rgba(255, 193, 7, 0.1);
+}
+
+.transaction-item.completed {
+  border-color: #28a745;
+  background: rgba(40, 167, 69, 0.1);
+}
+
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.status-badge.pending {
+  background: #ffc107;
+  color: #000;
+}
+
+.status-badge.completed {
+  background: #28a745;
+  color: #fff;
+}
+
+.upload-section {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.upload-button {
+  background: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.upload-button:hover {
+  background: #0056b3;
+}
+
+.file-name {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.upload-submit {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bukti-link {
+  color: #28a745;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bukti-link:hover {
+  text-decoration: underline;
+}
+
+.transaction-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 0.3rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-edit {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-delete {
+  background: #f44336;
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  background: #333;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 4px;
+}
+
+.btn-update {
+  background: #2196f3;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1a1a1a;
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.8rem 1rem;
+  }
+
+  nav ul {
+    gap: 1rem;
+  }
+
+  .price-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .game-banner {
+    max-height: 200px;
+  }
+}
+
+h2 {
+  margin: 1rem 0;
+}
+
+section {
+  margin: 1.5rem 0;
+}
+
+.instructions {
+  max-width: 800px;
+  margin: 1rem auto;
+  padding: 1rem;
+  background: #1a1a1a;
+  border-radius: 8px;
+}
+
+.instructions ol {
+  padding-left: 1.2rem;
+  margin: 0.8rem 0;
+}
+
+.instructions li {
+  margin-bottom: 0.6rem;
+}

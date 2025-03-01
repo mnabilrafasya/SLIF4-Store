@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Legends - SLIF4 Store</title>
+    <link rel="stylesheet" href="games.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo-container">
+        <a href="/">
+          <div class="navbar-logo">
+            <img
+              src="https://static.vecteezy.com/system/resources/thumbnails/032/836/024/small_2x/english-alphabet-s-with-a-crown-royal-king-queen-luxury-symbol-font-emblem-illustration-vector.jpg"
+              alt="Logo"
+            />
+          </div>
+          <h1 class="navbar-title">SLIF4</h1>
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/profil">Profil</a></li>
+          <li><a href="/cek-transaksi">Cek Transaksi</a></li>
+          <li>
+            <% if (userId) { %>
+            <a href="/logout">Log Out</a>
+            <% } else { %>
+            <a href="/akun">Masuk/Daftar</a>
+            <% } %>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="content">
+      <br />
+      <div class="game-details">
+        <h2>Mobile Legends</h2>
+        <p>Top-up cepat dan mudah, hanya di SLIF4 Store.</p>
+      </div>
+      <div class="game-banner">
+        <img
+          src="https://lelogama.go-jek.com/cms_editor/2018/10/23/Top-Up-Mobile-Legends.jpg"
+          alt="Mobile Legends Banner"
+        />
+          </div>
+      </div>
+
+      <section class="price-list">
+        <h2>Pilihan Top-Up</h2>
+        <div class="price-grid">
+          <% const prices = [ { amount: "11 Diamonds", price: "Rp3,000" }, {
+          amount: "56 Diamonds", price: "Rp15,000" }, { amount: "112 Diamonds",
+          price: "Rp30,000" }, { amount: "224 Diamonds", price: "Rp60,000" }, {
+          amount: "336 Diamonds", price: "Rp90,000" }, { amount: "560 Diamonds",
+          price: "Rp150,000" }, {amount: "724 Diamonds", price:
+          "Rp200,000"},{amount:"959 Diamonds", price: "Rp250,000"},{ amount:
+          "1575 Diamonds", price: "Rp400,000" }]; %> <% prices.forEach((item) =>
+          { %>
+          <div class="price-item">
+            <div class="diamond-info">
+              <img
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCsGXGL7s4zbFdX4QT5mju4uKswTyteQ97y1tssIj8vjq-UdtR6R8h-EQHXZxybNeFeQy3WNCMMJDgfLXBCnx9v5g-W4YKJeM1dWEC0iFYHUN1mTynqLtwBIX8nnsA8Av7Xt_uaqChbz6kfXoyw9ujSujrQ3MiqbqE3pbuEfoaWDaQQVkX_6XzY0Oi41Uh/w1200-h630-p-k-no-nu/Cara%20Mendapatkan%20Diamond%20ML%20secara%20Gratis.png"
+                alt="<%= item.amount %>"
+              />
+              <p><%= item.amount %></p>
+            </div>
+            <div class="price-info">
+              <p><%= item.price %></p>
+              <button
+                class="buy-button"
+                data-amount="<%= item.amount %>"
+                data-price="<%= item.price %>"
+                onclick="buyNow('<%= item.amount %>', '<%= item.price %>')"
+              >
+                Beli Sekarang
+              </button>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </section>
+
+      <section class="instructions">
+        <h2>Cara Top-Up</h2>
+        <ol>
+          <li>Silahkan daftar akun terlebih dahulu.</li>
+          <li>Kemudian login dengan akun yang sudah didaftar.</li>
+          <li>Pilih jumlah Diamonds yang ingin dibeli.</li>
+          <li>
+            Diamonds akan otomatis masuk ke akun Anda setelah pembayaran
+            selesai.
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 SLIF4 Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+      function buyNow(amount, price) {
+        const userId = '<%= userId %>'; // Ambil userId dari sesi
+        const username_game = '<%= username_game %>'; // Ambil username game dari sesi
+
+    
+        if (!userId) {
+          alert("Anda harus login untuk melakukan pembelian.");
+          window.location.href = '/akun'; // Arahkan ke halaman login
+          return;
+        }
+    
+        const nominal = parseInt(price.replace("Rp", "").replace(/,/g, ""));
+    
+        // Kirim data transaksi ke server
+        fetch('/cek-transaksi', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+          
+            game_name: 'Mobile Legends',
+            username_game: username_game,
+            nominal: nominal
+          }),
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(data => {
+          alert(data);
+          window.location.href = '/cek-transaksi';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("Terjadi kesalahan saat melakukan pembelian.");
+        });
+      }
+    </script>
+  </body>
+</html>

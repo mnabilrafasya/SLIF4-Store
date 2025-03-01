@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PUBG Mobile - SLIF4 Store</title>
+    <link rel="stylesheet" href="games.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo-container">
+        <a href="/">
+          <div class="navbar-logo">
+            <img
+              src="https://static.vecteezy.com/system/resources/thumbnails/032/836/024/small_2x/english-alphabet-s-with-a-crown-royal-king-queen-luxury-symbol-font-emblem-illustration-vector.jpg"
+              alt="Logo"
+            />
+          </div>
+          <h1 class="navbar-title">SLIF4</h1>
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/profil">Profil</a></li>
+          <li><a href="/cek-transaksi">Cek Transaksi</a></li>
+          <li>
+            <% if (userId) { %>
+            <a href="/logout">Log Out</a>
+            <% } else { %>
+            <a href="/akun">Masuk/Daftar</a>
+            <% } %>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="content">
+      <br />
+      <div class="game-details">
+        <h2>PUBG Mobile</h2>
+        <p>Top-up cepat dan mudah, hanya di SLIF4 Store.</p>
+      </div>
+      <div class="game-banner">
+        <img
+          src="https://news.codashop.com/id/wp-content/uploads/sites/4/2023/07/PUBG-Mobile-and-PUBG-PC.jpg"
+          alt="PUBG Mobile Banner"
+        />
+        </div>
+      </div>
+
+      <section class="price-list">
+        <h2>Pilihan Top-Up</h2>
+        <div class="price-grid">
+          <% const prices = [ { amount: "60 UC", price: "Rp10,000" }, { amount:
+          "300 UC", price: "Rp50,000" }, { amount: "600 UC", price: "Rp100,000"
+          }, { amount: "1200 UC", price: "Rp200,000" }, { amount: "1800 UC",
+          price: "Rp300,000" }, { amount: "3600 UC", price: "Rp600,000" } ]; %>
+          <% prices.forEach((item) => { %>
+          <div class="price-item">
+            <div class="uc-info">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzdW0c0SARAcaw4KSeI8gLegQ8F1FesdsSQ&s"
+                alt="<%= item.amount %>"
+              />
+              <p><%= item.amount %></p>
+            </div>
+            <div class="price-info">
+              <p><%= item.price %></p>
+              <button
+                class="buy-button"
+                data-amount="<%= item.amount %>"
+                data-price="<%= item.price %>"
+                onclick="buyNow('<%= item.amount %>', '<%= item.price %>')"
+              >
+                Beli Sekarang
+              </button>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </section>
+
+      <section class="instructions">
+        <h2>Cara Top-Up</h2>
+        <ol>
+          <li>Silahkan daftar akun terlebih dahulu.</li>
+          <li>Kemudian login dengan akun yang sudah didaftar.</li>
+          <li>Pilih jumlah Diamonds yang ingin dibeli.</li>
+          <li>
+            Diamonds akan otomatis masuk ke akun Anda setelah pembayaran
+            selesai.
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 SLIF4 Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+      function buyNow(amount, price) {
+        const userId = '<%= userId %>'; // Ambil userId dari sesi
+        const username_game = '<%= username_game %>'; // Ambil username game dari sesi
+
+    
+        if (!userId) {
+          alert("Anda harus login untuk melakukan pembelian.");
+          window.location.href = '/akun'; // Arahkan ke halaman login
+          return;
+        }
+    
+        const nominal = parseInt(price.replace("Rp", "").replace(/,/g, ""));
+    
+        // Kirim data transaksi ke server
+        fetch('/cek-transaksi', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+          
+            game_name: 'Pubg Mobile',
+            username_game: username_game,
+            nominal: nominal
+          }),
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(data => {
+          alert(data);
+          window.location.href = '/cek-transaksi';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("Terjadi kesalahan saat melakukan pembelian.");
+        });
+      }
+    </script>
+  </body>
+</html>

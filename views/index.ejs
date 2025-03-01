@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toko Top-Up Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo-container">
+        <a href="/">
+          <!-- Kontainer untuk logo dan judul -->
+          <div class="navbar-logo">
+            <img
+              src="https://static.vecteezy.com/system/resources/thumbnails/032/836/024/small_2x/english-alphabet-s-with-a-crown-royal-king-queen-luxury-symbol-font-emblem-illustration-vector.jpg"
+              alt="Logo"
+            />
+          </div>
+          <h1 class="navbar-title">SLIF4</h1>
+          <!-- Menambahkan header di samping logo -->
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/profil">Profil</a></li>
+          <li><a href="/cek-transaksi">Cek Transaksi</a></li>
+          <li>
+            <% if (userId) { %>
+            <a href="/logout">Log Out</a>
+            <% } else { %>
+            <a href="/akun">Masuk/Daftar</a>
+            <% } %>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="banner">
+        <div class="banner-text">
+          <h1>Topup Game di SLIF4 Store</h1>
+          <p>
+            Anti ribet, dibanding toko sebelah! <br />
+            Topup sekarang juga!
+          </p>
+          <a href="/akun" class="cta-button">Daftar Akun Sekarang</a>
+        </div>
+        <div class="banner-image">
+          <div class="carousel">
+            <div class="carousel-slide active">
+              <a href="/mobile-legends">
+                <img
+                  src="https://lelogama.go-jek.com/cms_editor/2018/10/23/Top-Up-Mobile-Legends.jpg"
+                  alt="Slide 1"
+              /></a>
+            </div>
+            <div class="carousel-slide">
+              <a href="/free-fire">
+                <img
+                  src="https://cdn.topupgim.com/product-rectangles/ac1f0b50-719a-4b67-a69b-84eb87bead2e.jpg"
+                  alt="Slide 2"
+              /></a>
+            </div>
+            <div class="carousel-slide">
+              <a href="/pubg-mobile">
+                <img
+                  src="https://cdn.topupgim.com/product-rectangles/d677a781-253e-4bad-99fc-69f1d1368ca1.jpg"
+                  alt="Slide 3"
+              /></a>
+            </div>
+            <button class="carousel-button prev" onclick="changeSlide(-1)">
+              &#10094;
+            </button>
+            <button class="carousel-button next" onclick="changeSlide(1)">
+              &#10095;
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="best-seller">
+        <h2>Best Seller</h2>
+        <p>Kategori terlaris di etalase kami.</p>
+        <div class="game-list">
+          <a href="/mobile-legends" class="game-card">
+            <img
+              src="https://mrwallpaper.com/images/hd/hero-lineup-with-mobile-legends-logo-bifbne81aghcjumf.jpg"
+              alt="Mobile Legends"
+            />
+            <p>Mobile Legends</p>
+          </a>
+          <a href="/free-fire" class="game-card">
+            <img
+              src="https://www.isports.id/wp-content/uploads/2023/10/Ada-beberapa-cara-menghadapi-cheater-di-Free-Fire.jpg"
+              alt="Free Fire"
+            />
+            <p>Free Fire</p>
+          </a>
+          <a href="/pubg-mobile" class="game-card">
+            <img
+              src="https://news.codashop.com/id/wp-content/uploads/sites/4/2023/07/PUBG-Mobile-and-PUBG-PC.jpg"
+              alt="PUBG Mobile"
+            />
+            <p>PUBG Mobile</p>
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 SLIF4 Store. All rights reserved.</p>
+    </footer>
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove("active");
+          if (i === index) {
+            slide.classList.add("active");
+          }
+        });
+      }
+
+      function changeSlide(direction) {
+        currentSlide =
+          (currentSlide + direction + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      // Menampilkan slide pertama saat halaman dimuat
+      showSlide(currentSlide);
+
+      // Mengganti slide secara otomatis setiap 5 detik (5000 ms)
+      setInterval(() => {
+        changeSlide(1); // Ganti ke slide berikutnya
+      }, 5000);
+    </script>
+  </body>
+</html>

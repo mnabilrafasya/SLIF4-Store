@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cek Transaksi - Toko Top-Up Game</title>
+    <link rel="stylesheet" href="cek-transaksi.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo-container">
+        <a href="/">
+          <div class="navbar-logo">
+            <img
+              src="https://static.vecteezy.com/system/resources/thumbnails/032/836/024/small_2x/english-alphabet-s-with-a-crown-royal-king-queen-luxury-symbol-font-emblem-illustration-vector.jpg"
+              alt="Logo"
+            />
+          </div>
+          <h1 class="navbar-title">SLIF4</h1>
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/profil">Profil</a></li>
+          <li><a href="/cek-transaksi">Cek Transaksi</a></li>
+          <li>
+            <% if (userId) { %>
+            <a href="/logout">Log Out</a>
+            <% } else { %>
+            <a href="/akun">Masuk/Daftar</a>
+            <% } %>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2>Riwayat Transaksi</h2>
+      <% if (transactions && transactions.length > 0) { %>
+      <div class="transaction-list">
+        <% transactions.forEach((transaction) => { %>
+        <div class="transaction-item">
+          <p>ID: <%= transaction.id %></p>
+          <p>Game: <%= transaction.game_name %></p>
+          <p>Username Game: <%= transaction.username_game %></p>
+          <p>Nominal: Rp<%= transaction.nominal.toLocaleString() %></p>
+          <p>
+            Tanggal: <%= new Date(transaction.created_at).toLocaleString() %>
+          </p>
+          <div class="status-container">
+            <p>
+              Status:
+              <span class="status-badge <%= transaction.status %>">
+                <%= transaction.status === 'pending' ? 'Menunggu Pembayaran' :
+                'Selesai' %>
+              </span>
+            </p>
+
+            <% if (transaction.status === 'pending') { %>
+            <form
+              action="/upload-bukti-pembayaran/<%= transaction.id %>"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <div class="upload-section">
+                <input
+                  type="file"
+                  name="bukti_pembayaran"
+                  id="bukti-<%= transaction.id %>"
+                  accept=".pdf, .jpg, .jpeg, .png"
+                  hidden
+                />
+                <label for="bukti-<%= transaction.id %>" class="upload-button">
+                  Pilih File
+                </label>
+                <span class="file-name" id="file-name-<%= transaction.id %>"
+                  >Belum ada file</span
+                >
+                <button type="submit" class="upload-submit">
+                  Upload Bukti
+                </button>
+              </div>
+            </form>
+            <% } else { %>
+            <div class="bukti-section">
+              <p>Bukti Pembayaran:</p>
+              <a
+                href="/uploads/<%= transaction.bukti_pembayaran %>"
+                target="_blank"
+                class="bukti-link"
+              >
+                <%= transaction.bukti_pembayaran %>
+              </a>
+            </div>
+            <% } %>
+          </div>
+
+          <div class="transaction-actions">
+            <form
+              action="/batalkan-transaksi/<%= transaction.id %>"
+              method="POST"
+            >
+              <button type="submit" class="btn-delete">Hapus Transaksi</button>
+            </form>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+      <% } else { %>
+      <p class="no-transaction">Belum ada transaksi</p>
+      <% } %>
+    </main>
+    <footer>
+      <p>&copy; 2024 SLIF4 Store. All rights reserved.</p>
+    </footer>
+    <script>
+      // Update nama file saat dipilih
+      document.querySelectorAll('input[type="file"]').forEach((input) => {
+        input.addEventListener("change", function (e) {
+          const fileName = this.files[0]?.name || "Belum ada file";
+          document.getElementById(
+            `file-name-${this.id.split("-")[1]}`
+          ).textContent = fileName;
+        });
+      });
+    </script>
+  </body>
+</html>
